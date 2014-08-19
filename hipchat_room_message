@@ -77,12 +77,12 @@ fi
 
 # nagios levels
 if [ ! -z "$LEVEL" ]; then
-  if [[ $LEVEL == 'CRITICAL' ]] || [[ $LEVEL == 'critical' ]]; then
+  if [[ $LEVEL == 'CRITICAL' ]] || [[ $LEVEL == 'critical' ]] || [[ $LEVEL == 'Critical' ]]; then
     COLOR="red";
-  elif [[ $LEVEL == 'WARNING' ]] || [[ $LEVEL == 'warning' ]]; then
+  elif [[ $LEVEL == 'ERROR' ]] || [[ $LEVEL == 'error' ]] || [[ $LEVEL == 'Error' ]]; then
+    COLOR="purple";
+  elif [[ $LEVEL == 'WARNING' ]] || [[ $LEVEL == 'warning' ]] || [[ $LEVEL == 'Warning' ]]; then
     COLOR="yellow";
-  elif [[ $LEVEL == 'UNKNOWN' ]] || [[ $LEVEL == 'unknown' ]]; then
-    COLOR="gray";
   elif [[ $LEVEL == 'OK' ]] || [[ $LEVEL == 'ok' ]]; then
     COLOR="green";
   elif [[ $LEVEL == 'DOWN' ]] || [[ $LEVEL == 'down' ]]; then

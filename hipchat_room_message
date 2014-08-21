@@ -80,9 +80,9 @@ if [ ! -z "$LEVEL" ]; then
   if [[ $LEVEL == 'CRITICAL' ]] || [[ $LEVEL == 'critical' ]] || [[ $LEVEL == 'Critical' ]]; then
     COLOR="red";
   elif [[ $LEVEL == 'ERROR' ]] || [[ $LEVEL == 'error' ]] || [[ $LEVEL == 'Error' ]]; then
-    COLOR="purple";
-  elif [[ $LEVEL == 'WARNING' ]] || [[ $LEVEL == 'warning' ]] || [[ $LEVEL == 'Warning' ]]; then
     COLOR="yellow";
+  elif [[ $LEVEL == 'WARNING' ]] || [[ $LEVEL == 'warning' ]] || [[ $LEVEL == 'Warning' ]]; then
+    COLOR="purple";
   elif [[ $LEVEL == 'OK' ]] || [[ $LEVEL == 'ok' ]]; then
     COLOR="green";
   elif [[ $LEVEL == 'DOWN' ]] || [[ $LEVEL == 'down' ]]; then

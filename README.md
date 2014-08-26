@@ -83,3 +83,18 @@ Command-line:
 ```bash
 $ cat message.txt | HIPCHAT_FROM="System" ./hipchat_room_message -c green
 ```
+### Error Logging
+
+To enable error logging, the log settings needs to be changed to ```LOG=y``` on the script. Default is set to ```LOG=n```. Also, the log file must be created with the correct permissions. The default log file is located in ```/var/log/hipchat.log```.
+
+#### Create the log file using the command-line:
+
+Create the file:
+
+```sudo touch /var/log/hipchat.log```
+
+Set the permissions of the file:
+
+```sudo chown <hipchat_user>:<hipchat_group> /var/log/hipchat.log```
+
+Where ```hipchat_user``` is the user that will exectue the script. And ```hipchat_group``` is the group where ```hipchat_user``` belongs to.

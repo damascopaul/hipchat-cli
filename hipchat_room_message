@@ -40,8 +40,14 @@ EOF
 }
 
 # Include hipchat defaults if available
-test -f /etc/hipchat && . /etc/hipchat
+test -f /etc/hipchat/conifg && . /etc/hipchat/config
 
+#my own variables
+TIMESTAMP=$(date "+%b %d %Y %H:%M:%S")
+LOGFILE=/var/log/hipchat.log
+LOG=n
+
+#default variables
 TOKEN=${HIPCHAT_TOKEN:-}
 ROOM_ID=${HIPCHAT_ROOM_ID:-}
 FROM=${HIPCHAT_FROM:-}
@@ -121,12 +127,20 @@ fi
 
 # do the curl
 if [ $API == 'v2' ]; then
-  curl -sS \
+  cmdout="$(curl -sS \
     -H 'Content-type: application/json' \
     -d "{\"color\":\"$COLOR\", \"message\":\"$INPUT\", \"message_format\":\"$FORMAT\", \"notify\":$NOTIFY}" \
-    https://$HOST/v2/room/$ROOM_ID/notification?auth_token=$TOKEN
+    https://$HOST/v2/room/$ROOM_ID/notification?auth_token=$TOKEN)\ "
 else
-  curl -sS \
+  cmdout="$(curl -sS \
     -d "auth_token=$TOKEN&room_id=$ROOM_ID&from=$FROM&color=$COLOR&message_format=$FORMAT&message=$INPUT&notify=$NOTIFY" \
-    https://$HOST/v1/rooms/message
+    https://$HOST/v1/rooms/message)\ "
+fi
+# echo $cmdout
+
+#log errors
+if [ $LOG == 'y' ] && test -e $LOGFILE; then
+    if echo $cmdout | grep -q "error"; then
+        echo "$TIMESTAMP $cmdout" >> $LOGFILE
+    fi
 fi
